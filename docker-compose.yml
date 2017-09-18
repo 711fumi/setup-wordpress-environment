@@ -1,0 +1,21 @@
+version: "2"
+services:
+    wordpress:
+        image: wordpress:latest
+        ports:
+            - "9000:80"
+        depends_on:
+            - db
+        environment:
+            WORDPRESS_DB_HOST: "db:3306"
+        env_file: .env
+    db:
+        image: mysql:latest
+        ports:
+            - "3399:3306"
+        env_file: .env
+        volumes:
+            - db-data:/var/lib/mysql
+
+volumes:
+    db-data:
